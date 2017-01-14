@@ -151,6 +151,7 @@ void avfilter_register_all(void)
     REGISTER_FILTER(BLEND,          blend,          vf);
     REGISTER_FILTER(BOXBLUR,        boxblur,        vf);
     REGISTER_FILTER(BWDIF,          bwdif,          vf);
+    REGISTER_FILTER(CCLINE,         ccline,         vf);
     REGISTER_FILTER(CHROMAKEY,      chromakey,      vf);
     REGISTER_FILTER(CIESCOPE,       ciescope,       vf);
     REGISTER_FILTER(CODECVIEW,      codecview,      vf);

@@ -135,6 +135,7 @@ OBJS-$(CONFIG_BLACKFRAME_FILTER)             += vf_blackframe.o
 OBJS-$(CONFIG_BLEND_FILTER)                  += vf_blend.o dualinput.o framesync.o
 OBJS-$(CONFIG_BOXBLUR_FILTER)                += vf_boxblur.o
 OBJS-$(CONFIG_BWDIF_FILTER)                  += vf_bwdif.o
+OBJS-$(CONFIG_CCLINE_FILTER)                 += vf_ccline.o
 OBJS-$(CONFIG_CHROMAKEY_FILTER)              += vf_chromakey.o
 OBJS-$(CONFIG_CIESCOPE_FILTER)               += vf_ciescope.o
 OBJS-$(CONFIG_CODECVIEW_FILTER)              += vf_codecview.o
