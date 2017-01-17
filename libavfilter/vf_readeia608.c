@@ -20,7 +20,8 @@
 
 /**
  * @file
- * CC line scanner
+ * Filter for reading closed captioning data (EIA-608).
+ * See also https://en.wikipedia.org/wiki/EIA-608
  */
 
 #include <string.h>
@@ -56,8 +57,8 @@ typedef struct ReadEIA608Context {
 #define FLAGS AV_OPT_FLAG_VIDEO_PARAM|AV_OPT_FLAG_FILTERING_PARAM
 
 static const AVOption readeia608_options[] = {
-    { "start", "set from which line to scan for codes",                            OFFSET(start), AV_OPT_TYPE_INT,   {.i64=20},      0, INT_MAX, FLAGS },
-    { "end",   "set to which line to scan for codes",                              OFFSET(end),   AV_OPT_TYPE_INT,   {.i64=21},      0, INT_MAX, FLAGS },
+    { "start", "set from which line to scan for codes",                            OFFSET(start), AV_OPT_TYPE_INT,   {.i64=0},       0, INT_MAX, FLAGS },
+    { "end",   "set to which line to scan for codes",                              OFFSET(end),   AV_OPT_TYPE_INT,   {.i64=29},      0, INT_MAX, FLAGS },
     { "mac",   "set minimal acceptable amplitude change for sync codes detection", OFFSET(mac),   AV_OPT_TYPE_FLOAT, {.dbl=.20}, 0.001,       1, FLAGS },
     { "spw",   "set ratio of width reserved for sync code detection",              OFFSET(spw),   AV_OPT_TYPE_FLOAT, {.dbl=.27},  0.01,    0.70, FLAGS },
     { "mhd",   "set max peaks height difference for sync code detection",          OFFSET(mhd),   AV_OPT_TYPE_FLOAT, {.dbl=.08},     0,    0.50, FLAGS },
@@ -102,7 +103,7 @@ static int config_input(AVFilterLink *inlink)
         s->end = inlink->h - 1;
     }
 
-    if (s->start >= s->end) {
+    if (s->start > s->end) {
         av_log(ctx, AV_LOG_ERROR, "Invalid range.\n");
         return AVERROR(EINVAL);
     }
